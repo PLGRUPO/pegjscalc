@@ -1,0 +1,10 @@
+# Archivos temporales generados por el editor
+*~
+*.swp
+
+# La base de datos local no debe estar en el repositorio
+database.db
+
+# Ficheros generados localmente
+.bundle/*
+.sass-cache/*
