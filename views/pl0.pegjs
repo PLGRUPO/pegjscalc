@@ -22,50 +22,100 @@
 
 program = b:block END_SYMBOL { return b; }
 
-block = (const_decl)? (var_decl)?
+block = (const_decl)* (var_decl)* (proc_decl)? statement 
 
 const_decl = CONST ID ASSIGN NUMBER (COMMA ID ASSIGN NUMBER)* END_SENTENCE
 
 var_decl = VAR ID (COMMA ID)* END_SENTENCE
 
-st     = i:ID ASSIGN e:exp { return {type: '=', left: i, right: e}; }
-       / IF e:exp THEN st:st ELSE sf:st
-         {
-           return {
-             type: 'IFELSE',
-             c:  e,
-             st: st,
-             sf: sf,
-           };
-         }
-       / IF e:exp THEN st:st    
-         {
-           return {
-             type: 'IF',
-             c:  e,
-             st: st
-           };
-         }
-exp    = t:term   r:(ADD term)*   { return tree(t,r); }
-term   = f:factor r:(MUL factor)* { return tree(f,r); }
+/*
+ * procedure nombre (parámetro1, parámetro2, ...);
+ *   código
+ *   ...
+ */
+proc_decl
+  = PROCEDURE ID arglist? END_SENTENCE block END_SENTENCE
 
-factor = NUMBER
-       / ID
-       / LEFTPAR t:exp RIGHTPAR   { return t; }
+arglist
+  = LEFTPAR ID (COMMA ID)* RIGHTPAR
+
+statement
+  = i:ID ASSIGN e:expression {
+    return {
+      type: '=',
+      left: i,
+      right: e
+    };
+  }
+  / CALL ID arglist?
+  / BEGIN (statement END_SENTENCE)* END
+  / IF LEFTPAR c:condition RIGHTPAR THEN st:statement ELSE sf:statement {
+    return {
+      type: 'IFELSE',
+      cond: c,
+      st: st,
+      sf: sf,
+    };
+  }
+  / IF LEFTPAR c:condition RIGHTPAR THEN st:statement {
+    return {
+      type: 'IF',
+      cond:  c,
+      st: st
+    };
+  }
+  / WHILE LEFTPAR c:condition RIGHTPAR DO st:statement {
+    return {
+      type: 'WHILE',
+      cond: c,
+      st: st
+    };
+  }
+  / DO st:statement WHILE LEFTPAR c:condition RIGHTPAR {
+    return {
+      type: 'DOWHILE',
+      cond: c,
+      st: st
+    };
+  }
+
+condition
+  = ODD expression
+  / expression COMPARISON_OP expression
+
+expression = t:term r:(ADD term)* { return tree(t,r); }
+term = f:factor r:(MUL factor)* { return tree(f,r); }
+
+factor 
+  = ID
+  / NUMBER
+  / LEFTPAR exp:expression RIGHTPAR { return exp; }
 
 _ = $[ \t\n\r]*
 
 ASSIGN   = _ op:'=' _  { return op; }
 ADD      = _ op:[+-] _ { return op; }
 MUL      = _ op:[*/] _ { return op; }
-ID       = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _ 
-            { 
-              return { type: 'ID', value: id }; 
+ID       = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _ { 
+              return {
+                type: 'ID',
+                value: id
+              };
             }
-NUMBER   = _ digits:$[0-9]+ _ 
-            { 
-              return { type: 'NUM', value: parseInt(digits, 10) }; 
+NUMBER   = _ digits:$[0-9]+ _ { 
+              return {
+                type: 'NUM',
+                value: parseInt(digits, 10)
+              };
             }
+COMPARISON_OP = _ [<>] _
+              / _ [<>=]'=' _
+              / _ '!=' _ {
+                  return {
+                    type: 'COMPARISON',
+                    value: op
+                  };
+                }
 
 LEFTPAR  = _"("_
 RIGHTPAR = _")"_
@@ -78,3 +128,10 @@ CONST = _'const'_
 IF       = _'if'_
 THEN     = _'then'_
 ELSE     = _'else'_
+PROCEDURE = _'procedure'_
+CALL = _'call'_
+BEGIN = _'begin'_
+END = _'end'_
+WHILE = _'while'_
+DO = _'do'_
+ODD = _'odd'_
