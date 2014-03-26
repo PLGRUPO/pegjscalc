@@ -20,25 +20,32 @@
   }
 }
 
-st     = i:ID ASSIGN e:exp            
-            { return {type: '=', left: i, right: e}; }
+program = b:block END_SYMBOL { return b; }
+
+block = (const_decl)? (var_decl)?
+
+const_decl = CONST ID ASSIGN NUMBER (COMMA ID ASSIGN NUMBER)* END_SENTENCE
+
+var_decl = VAR ID (COMMA ID)* END_SENTENCE
+
+st     = i:ID ASSIGN e:exp { return {type: '=', left: i, right: e}; }
        / IF e:exp THEN st:st ELSE sf:st
-           {
-             return {
-               type: 'IFELSE',
-               c:  e,
-               st: st,
-               sf: sf,
-             };
-           }
+         {
+           return {
+             type: 'IFELSE',
+             c:  e,
+             st: st,
+             sf: sf,
+           };
+         }
        / IF e:exp THEN st:st    
-           {
-             return {
-               type: 'IF',
-               c:  e,
-               st: st
-             };
-           }
+         {
+           return {
+             type: 'IF',
+             c:  e,
+             st: st
+           };
+         }
 exp    = t:term   r:(ADD term)*   { return tree(t,r); }
 term   = f:factor r:(MUL factor)* { return tree(f,r); }
 
@@ -51,11 +58,6 @@ _ = $[ \t\n\r]*
 ASSIGN   = _ op:'=' _  { return op; }
 ADD      = _ op:[+-] _ { return op; }
 MUL      = _ op:[*/] _ { return op; }
-LEFTPAR  = _"("_
-RIGHTPAR = _")"_
-IF       = _ "if" _
-THEN     = _ "then" _
-ELSE     = _ "else" _
 ID       = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _ 
             { 
               return { type: 'ID', value: id }; 
@@ -64,3 +66,15 @@ NUMBER   = _ digits:$[0-9]+ _
             { 
               return { type: 'NUM', value: parseInt(digits, 10) }; 
             }
+
+LEFTPAR  = _"("_
+RIGHTPAR = _")"_
+END_SYMBOL = _'.'_
+END_SENTENCE = _';'_
+COMMA = _','_
+
+VAR = _'var'_
+CONST = _'const'_
+IF       = _'if'_
+THEN     = _'then'_
+ELSE     = _'else'_
