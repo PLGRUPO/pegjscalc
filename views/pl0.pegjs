@@ -22,7 +22,7 @@
 
 program = b:block END_SYMBOL { return b; }
 
-block = (const_decl)* (var_decl)* (proc_decl)? statement 
+block = const_decl? var_decl? proc_decl* statement 
 
 const_decl = CONST ID ASSIGN NUMBER (COMMA ID ASSIGN NUMBER)* END_SENTENCE
 
@@ -40,15 +40,8 @@ arglist
   = LEFTPAR ID (COMMA ID)* RIGHTPAR
 
 statement
-  = i:ID ASSIGN e:expression {
-    return {
-      type: '=',
-      left: i,
-      right: e
-    };
-  }
-  / CALL ID arglist?
-  / BEGIN (statement END_SENTENCE)* END
+  = CALL ID arglist?
+  / BEGIN statement (END_SENTENCE statement)* END
   / IF LEFTPAR c:condition RIGHTPAR THEN st:statement ELSE sf:statement {
     return {
       type: 'IFELSE',
@@ -78,6 +71,14 @@ statement
       st: st
     };
   }
+  / i:ID ASSIGN e:expression {
+    return {
+      type: '=',
+      left: i,
+      right: e
+    };
+  }
+  / /* aceptamos sentencias vacías */
 
 condition
   = ODD expression
@@ -87,8 +88,8 @@ expression = t:term r:(ADD term)* { return tree(t,r); }
 term = f:factor r:(MUL factor)* { return tree(f,r); }
 
 factor 
-  = ID
-  / NUMBER
+  = NUMBER
+  / ID
   / LEFTPAR exp:expression RIGHTPAR { return exp; }
 
 _ = $[ \t\n\r]*
@@ -108,9 +109,8 @@ NUMBER   = _ digits:$[0-9]+ _ {
                 value: parseInt(digits, 10)
               };
             }
-COMPARISON_OP = _ [<>] _
-              / _ [<>=]'=' _
-              / _ '!=' _ {
+COMPARISON_OP = _ op:([<>=!]'=') _
+              / _ op:[<>] _ {
                   return {
                     type: 'COMPARISON',
                     value: op
@@ -123,15 +123,15 @@ END_SYMBOL = _'.'_
 END_SENTENCE = _';'_
 COMMA = _','_
 
-VAR = _'var'_
-CONST = _'const'_
-IF       = _'if'_
-THEN     = _'then'_
-ELSE     = _'else'_
-PROCEDURE = _'procedure'_
-CALL = _'call'_
-BEGIN = _'begin'_
-END = _'end'_
-WHILE = _'while'_
-DO = _'do'_
-ODD = _'odd'_
+VAR = _'VAR'_
+CONST = _'CONST'_
+IF       = _'IF'_
+THEN     = _'THEN'_
+ELSE     = _'ELSE'_
+PROCEDURE = _'PROCEDURE'_
+CALL = _'CALL'_
+BEGIN = _'BEGIN'_
+END = _'END'_
+WHILE = _'WHILE'_
+DO = _'DO'_
+ODD = _'ODD'_
