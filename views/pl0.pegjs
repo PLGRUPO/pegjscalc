@@ -96,8 +96,23 @@ arglist
     return res;
   }
 
+argexplist
+  = LEFTPAR e:expression es:(COMMA expression)* RIGHTPAR {
+    var res = [{
+      type: 'ARG',
+      content: e
+    }];
+    for (var i in es) {
+      res.push({
+        type: 'ARG',
+        content: es[i][1]
+      });
+    }
+    return res;
+  }
+
 statement
-  = CALL id:ID al:arglist? {
+  = CALL id:ID al:argexplist? {
     return {
       type: 'PROC_CALL',
       arguments: al
