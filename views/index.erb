@@ -1,40 +1,110 @@
-<h1>Analizador de PL0 ampliado usando PEG.js</h1>
-<div id="content">
-  <p class="loadfile">
-    <input type="file" id="examples" />
-  </p>
-  <p>
-  <nav>
-  <ul>
-    <% programs.each do |p| %>
-      <li><a href="<%= p.name %>" <%=current?('/'+p.name)%>><%= p.name %></a></li>
-    <% end %>
-  </ul>
-  </nav>
-  <table>
-    <tr>
-      <td>
-        <form action="/save" method="post">
-          <textarea id="input" name="input" 
-                    autofocus cols = "40" rows = "4">
-<%= source %>
-          </textarea>
-          <br/>
-          <label for="saveas">Save as</label>
-          <input id="saveas" type="text" name="fname" 
-                 title="name" pattern="\w+" />
-        </form>
-      </td>
-      <td><button id="parse" type="button">parse</button></td>
-    </tr>
-  </table>
-  </p>
-  <div class="output">
-    <pre>
-<span id="output"></span> <!-- Output goes here! --> 
-    </pre>
-  </div>
+<div class="main-content clearfix">
+	<div class="tile-area no-padding clearfix">
+		<div class="tile-group no-margin no-padding1 clearfix" style="width: 100%;">
+		
+			<div class="tile quadro quadro-vertical ol-transparent">
+			
+			<div class="tab-control" data-role="tab-control">
+    <ul class="tabs">
+        <li class="active"><a href="#_page_1">Entrada</a></li>
+        <li><a href="#_page_2">Salida</a></li>
+        <li><a href="#_page_3">Upload<i class="icon-rocket"></i></a></li>
+        <li class="place-right"><a href="#_page_4"><i class="icon-cog"></i></a></li>
+    </ul>
+ 
+    <div class="frames">
+        <div class="frame" id="_page_1">...</div>
+        <div class="frame" id="_page_2">...</div>
+        <div class="frame" id="_page_3">...</div>
+    </div>
 </div>
-
+				<p>
+					<input type="file" id="examples"/>
+				</p>
+				<p>
+					<nav>
+					<ul>
+						<% programs.each do |p| %>
+						<li><a href="<%= p.name %>" <%=current?('/'+p.name)%>><% p.name e %></a></li>
+						<% end %>
+					</ul>
+					</nav>
+					
+							<form action="/save" method="post">
+							<div style="float: left; color:black;"><label for="saveas">Save as</label></div>
+								<input id="saveas" type="text" name="fname" title="name" pattern="\w+"/>
+								<br/><br/>
+								<textarea id="input" name="input" autofocus style="width:100%;height:290px">
+								<%= source %>
+								</textarea>
+								<br/>
+								
+							</form>
+						
+						
+							<div class="input-control switch" id="parse" style="margin-left:auto;margin-right:auto;">
+    <label style="color:black;">
+    ON
+        <input type="checkbox" />
+        <span class="check"></span>
+        OFF
+    </label>
+</div>
+					
+				</p>
+				<div class="output">
+					<pre>
+						<span id="output"></span>
+						<!-- Output goes here! -->
+					</pre>
+				</div>
+			</div>
+			<div class="tile double bg-gray ol-transparent">
+				<a href="https://github.com/juanFGR" target="_blank">
+				<div class="tile-content icon">
+					<span class="icon-github"></span>
+				</div>
+				</a><a>
+				</a>
+			</div>
+			<div class="tile ">
+				<a href="http://en.wikipedia.org/wiki/Recursive_descent_parser#Example_parser" title="Wikipedia" target="_blank">
+				<img src="/wikipediapng.png" style="max-height:100%; height:200px;">
+				
+				</a>
+			</div>
+			<div class="tile">
+				<a href="http://docs.mathjax.org/en/latest/start.html" title="MathJax" target="_blank">
+				<img src="/mathjax.png" style="max-height:100%; height:200px;">
+				
+				</a>
+			</div>
+			<div class="tile bg-red">
+			  <a href="http://pegjs.majda.cz/" title="PEG.js" target="_blank">
+				<img src="/pegjs.jpg" style="max-height:100%; height:200px;">
+				<div class="brand">
+					<div class="label">
+						mathjax
+					</div>
+				</div>
+			</a>
+			</div>
+			<div class="tile">
+			<li>
+			<a href="http://crguezl.github.io/pl-html/" title="PLGH" target="_blank">
+				<img src="/moodle.png" style="max-height:100%; height:200px;width:100%">
+			</a>
+			</div>
+			<div class="tile double ol-transparent">
+				<a class="tile double bg-lightBlue" data-click="transform" href="http://sass-lang.com/" title="Sass">
+				<div class="tile-content image">
+					<img src="/haml-sass.jpg" style="max-height:100%; height:200px;">
+				</div>
+			
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
 <script src="pl0.js"></script>
 <script src="main.js"></script>
