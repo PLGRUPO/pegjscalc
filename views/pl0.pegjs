@@ -72,7 +72,12 @@ proc_decl
       type: 'PROCEDURE',
       name: pid.value,
       args: al,
-      block: b
+      block: {
+        const_decls: b.const_decls,
+        var_decl: b.var_decl,
+        proc_decl: b.proc_decl,
+        content: b.content
+      }
     };
   }
 
@@ -92,8 +97,18 @@ arglist
   }
 
 statement
-  = CALL ID arglist?
-  / BEGIN statement (END_SENTENCE statement)* END
+  = CALL id:ID al:arglist? {
+    return {
+      type: 'PROC_CALL',
+      arguments: al
+    };
+  }
+  / BEGIN st:statement sts:(END_SENTENCE statement)* END {
+    var res = [st];
+    for (var i in sts)
+      res.push(sts[i][1]);
+    return res;
+  }
   / IF LEFTPAR c:condition RIGHTPAR THEN st:statement ELSE sf:statement {
     return {
       type: 'IFELSE',
