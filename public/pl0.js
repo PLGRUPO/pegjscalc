@@ -49,7 +49,7 @@ pl0 = (function() {
           res = [cd];
           if (cds != null)
             for (var i in cds)
-              res.push(i[1]);
+              res.push(cds[i][1]);
           return res;
           //return cds[0][1];
         },
@@ -57,7 +57,7 @@ pl0 = (function() {
           return {
             type: 'CONST VAR',
             name: id.value,
-            value: nb
+            value: nb.value
           };
         },
         peg$c7 = function(c, st, sf) {

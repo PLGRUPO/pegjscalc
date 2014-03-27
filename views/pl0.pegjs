@@ -36,7 +36,7 @@ const_decls = CONST cd:const_decl cds:(COMMA const_decl)* END_SENTENCE {
   res = [cd];
   if (cds != null)
     for (var i in cds)
-      res.push(i[1]);
+      res.push(cds[i][1]);
   return res;
   //return cds[0][1];
 }
@@ -45,7 +45,7 @@ const_decl = id:ID ASSIGN nb:NUMBER {
   return {
     type: 'CONST VAR',
     name: id.value,
-    value: nb
+    value: nb.value
   };
 }
 
