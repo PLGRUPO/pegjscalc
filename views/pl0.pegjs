@@ -1,6 +1,6 @@
 /*
- * Classic example grammar, which recognizes simple arithmetic expressions like
- * "2*(3+4)". The parser generated from this grammar then AST.
+ * Gramática que reconoce PL/0, añadiendo soporte para asignar parámetros
+ * a los procedimientos
  */
 
 {
@@ -22,9 +22,32 @@
 
 program = b:block END_SYMBOL { return b; }
 
-block = const_decl? var_decl? proc_decl* statement 
+block = cd:const_decls? vd:var_decl? pd:proc_decl* st:statement {
+  return {
+    type: 'BLOCK',
+    const_decls: cd,
+    var_decl: vd,
+    proc_decl: pd,
+    content: st
+  };
+}
 
-const_decl = CONST ID ASSIGN NUMBER (COMMA ID ASSIGN NUMBER)* END_SENTENCE
+const_decls = CONST cd:const_decl cds:(COMMA const_decl)* END_SENTENCE {
+  res = [cd];
+  if (cds != null)
+    for (var i in cds)
+      res.push(i[1]);
+  return res;
+  //return cds[0][1];
+}
+
+const_decl = id:ID ASSIGN nb:NUMBER {
+  return {
+    type: 'CONST VAR',
+    name: id.value,
+    value: nb
+  };
+}
 
 var_decl = VAR ID (COMMA ID)* END_SENTENCE
 
@@ -92,7 +115,7 @@ factor
   / ID
   / LEFTPAR exp:expression RIGHTPAR { return exp; }
 
-_ = $[ \t\n\r]*
+_ = $[ \t\n\r]* { return; }
 
 ASSIGN   = _ op:'=' _  { return op; }
 ADD      = _ op:[+-] _ { return op; }
