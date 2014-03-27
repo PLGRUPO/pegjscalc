@@ -49,7 +49,19 @@ const_decl = id:ID ASSIGN nb:NUMBER {
   };
 }
 
-var_decl = VAR ID (COMMA ID)* END_SENTENCE
+var_decl = VAR id:ID ids:(COMMA ID)* END_SENTENCE {
+  res = [{
+    type: 'VAR',
+    name: id.value
+  }];
+  for (var i in ids) {
+    res.push({
+      type: 'VAR',
+      name: ids[i][1].value
+    });
+  }
+  return res;
+}
 
 /*
  * procedure nombre (parámetro1, parámetro2, ...);
