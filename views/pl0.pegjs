@@ -27,7 +27,7 @@ block = cd:const_decls? vd:var_decl? pd:proc_decl* st:statement {
     type: 'BLOCK',
     const_decls: cd,
     var_decl: vd,
-    proc_decl: pd,
+    proc_decl: pd.length > 0? pd : null,
     content: st
   };
 }
@@ -115,6 +115,7 @@ statement
   = CALL id:ID al:argexplist? {
     return {
       type: 'PROC_CALL',
+      name: id.value,
       arguments: al
     };
   }
@@ -163,8 +164,19 @@ statement
   / /* aceptamos sentencias vacías */
 
 condition
-  = ODD expression
-  / expression COMPARISON_OP expression
+  = ODD e:expression {
+    return {
+      type: 'ODD',
+      exp: e
+    };
+  }
+  / leftexp:expression c:COMPARISON_OP rightexp:expression {
+    return {
+      type: c.value,
+      left: leftexp,
+      right: rightexp
+    };
+  }
 
 expression = t:term r:(ADD term)* { return tree(t,r); }
 term = f:factor r:(MUL factor)* { return tree(f,r); }
