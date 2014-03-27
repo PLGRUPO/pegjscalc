@@ -172,7 +172,7 @@ condition
   }
   / leftexp:expression c:COMPARISON_OP rightexp:expression {
     return {
-      type: c.value,
+      type: c,
       left: leftexp,
       right: rightexp
     };
@@ -191,41 +191,40 @@ _ = $[ \t\n\r]*
 ASSIGN   = _ op:'=' _  { return op; }
 ADD      = _ op:[+-] _ { return op; }
 MUL      = _ op:[*/] _ { return op; }
-ID       = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _ {
-              return {
-                type: 'ID',
-                value: id
-              };
-            }
-NUMBER   = _ digits:$[0-9]+ _ { 
-              return {
-                type: 'NUM',
-                value: parseInt(digits, 10)
-              };
-            }
-COMPARISON_OP = _ op:([<>=!]'=') _
-              / _ op:[<>] _ {
-                  return {
-                    type: 'COMPARISON',
-                    value: op
-                  };
-                }
 
-LEFTPAR  = _"("_
-RIGHTPAR = _")"_
-END_SYMBOL = _'.'_
+ID = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _ {
+  return {
+    type: 'ID',
+    value: id
+  };
+}
+
+NUMBER = _ digits:$[0-9]+ _ { 
+  return {
+    type: 'NUM',
+    value: parseInt(digits, 10)
+  };
+}
+
+COMPARISON_OP
+  = _ op:$([<>=!]'=') _ { return op; }
+  / _ op:[<>] _ { return op; }
+
+LEFTPAR      = _"("_
+RIGHTPAR     = _")"_
+END_SYMBOL   = _'.'_
 END_SENTENCE = _';'_
-COMMA = _','_
+COMMA        = _','_
 
-VAR = _'VAR'_
-CONST = _'CONST'_
-IF = _'IF'_
-THEN = _'THEN'_
-ELSE = _'ELSE'_
-PROCEDURE = _'PROCEDURE'_
-CALL = _'CALL'_
-BEGIN = _'BEGIN'_
-END = _'END'_
-WHILE = _'WHILE'_
-DO = _'DO'_
-ODD = _'ODD'_
+VAR          = _'VAR'_
+CONST        = _'CONST'_
+IF           = _'IF'_
+THEN         = _'THEN'_
+ELSE         = _'ELSE'_
+PROCEDURE    = _'PROCEDURE'_
+CALL         = _'CALL'_
+BEGIN        = _'BEGIN'_
+END          = _'END'_
+WHILE        = _'WHILE'_
+DO           = _'DO'_
+ODD          = _'ODD'_
