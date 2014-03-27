@@ -34,11 +34,9 @@ block = cd:const_decls? vd:var_decl? pd:proc_decl* st:statement {
 
 const_decls = CONST cd:const_decl cds:(COMMA const_decl)* END_SENTENCE {
   res = [cd];
-  if (cds != null)
-    for (var i in cds)
-      res.push(cds[i][1]);
+  for (var i in cds)
+    res.push(cds[i][1]);
   return res;
-  //return cds[0][1];
 }
 
 const_decl = id:ID ASSIGN nb:NUMBER {
@@ -69,10 +67,29 @@ var_decl = VAR id:ID ids:(COMMA ID)* END_SENTENCE {
  *   ...
  */
 proc_decl
-  = PROCEDURE ID arglist? END_SENTENCE block END_SENTENCE
+  = PROCEDURE pid:ID al:arglist? END_SENTENCE b:block END_SENTENCE {
+    return {
+      type: 'PROCEDURE',
+      name: pid.value,
+      args: al,
+      block: b
+    };
+  }
 
 arglist
-  = LEFTPAR ID (COMMA ID)* RIGHTPAR
+  = LEFTPAR id:ID ids:(COMMA ID)* RIGHTPAR {
+    var res = [{
+      type: 'ARG',
+      value: id.value
+    }];
+    for (var i in ids) {
+      res.push({
+        type: 'ARG',
+        value: ids[i][1].value
+      });
+    }
+    return res;
+  }
 
 statement
   = CALL ID arglist?
@@ -127,12 +144,12 @@ factor
   / ID
   / LEFTPAR exp:expression RIGHTPAR { return exp; }
 
-_ = $[ \t\n\r]* { return; }
+_ = $[ \t\n\r]*
 
 ASSIGN   = _ op:'=' _  { return op; }
 ADD      = _ op:[+-] _ { return op; }
 MUL      = _ op:[*/] _ { return op; }
-ID       = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _ { 
+ID       = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _ {
               return {
                 type: 'ID',
                 value: id
@@ -160,9 +177,9 @@ COMMA = _','_
 
 VAR = _'VAR'_
 CONST = _'CONST'_
-IF       = _'IF'_
-THEN     = _'THEN'_
-ELSE     = _'ELSE'_
+IF = _'IF'_
+THEN = _'THEN'_
+ELSE = _'ELSE'_
 PROCEDURE = _'PROCEDURE'_
 CALL = _'CALL'_
 BEGIN = _'BEGIN'_
