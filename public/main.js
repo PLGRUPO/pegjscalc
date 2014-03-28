@@ -10,13 +10,17 @@ $(document).ready(function() {
 
   $("#examples").change(function(ev) {
     var f = ev.target.files[0]; 
-    var r = new FileReader();
-    r.onload = function(e) { 
-      var contents = e.target.result;
-      
-      input.innerHTML = contents;
+    if(f){
+      var r = new FileReader();
+	r.onload = function(e) { 
+	  var contents = e.target.result;
+	  $("#saveas").val(f.name);
+	  input.innerHTML = contents;
+	}
+      r.readAsText(f);
+    } else { 
+      alert("Failed to load file");
     }
-    r.readAsText(f);
   });
 
   
