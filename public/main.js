@@ -3,6 +3,8 @@ $(document).ready(function() {
     try {
       var result = pl0.parse($('#input').val());
       $('#output').html(JSON.stringify(result,undefined,2));
+      $("#entrada").hide();
+      $( "#salida" ).show();
     } catch (e) {
       $('#output').html('<div class="error"><pre>\n' + String(e) + '\n</pre></div>');
     }
@@ -40,6 +42,9 @@ $( "#tad_salida" ).click(function() {
     saveTextAsFile($( "#output" ).html(),$( "#saveas" ).val());
 });
   
+$( "#savebutton" ).click(function() {
+    $('#formsave').submit();
+});
 
   var editor = CodeMirror.fromTextArea($("#salida"), {
     mode: "text/pascal"

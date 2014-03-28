@@ -28,36 +28,21 @@
 			<li>
 			<a class="element brand"> Analizador de PL0 ampliado usando PEG.js</a>
 			</li>
+				<li><a href="/grammar" title="Grammar" <%=current?("/grammar")%>>Grammar</a></li>
+	<li><a href="/test" title="DataMapper" <%=current?("/test")%>>Test</a></li>		
+	<li><a href="http://campusvirtual.ull.es/1314/course/view.php?id=1104" title="PL-UDV" target="_blank">PL-UDV</a></li>
+	<li><a href="http://datamapper.org/" title="DataMapper" target="_blank">DataMapper</a></li>
 		</ul>
 		<div class="no-tablet-portrait">
 			<span class="element-divider"></span>
-			<a id ="download" class="element brand"><span class="icon-download-2"></span></a>
+			<a id ="download" class="element brand"><span class="icon-download-2">&nbsp;Download</span></a>
 			<span class="element-divider"></span>
-			<div class="element place-right">
-				<a class="dropdown-toggle" href="#">
-				<span class="icon-cog"></span>
-				</a>
-				<ul class="dropdown-menu place-right" data-role="dropdown">
-					<li><a href="#">Products</a></li>
-					<li><a href="#">Download</a></li>
-					<li><a href="#">Support</a></li>
-					<li><a href="#">Buy Now</a></li>
-				</ul>
-			</div>
+	
 			
 		</div>
 	</div>
 </div>
-<nav>
-<ul>
-	<li><a href="/grammar" title="Grammar" <%=current?("/grammar")%>>Grammar</a></li>
-	<li><a href="/test" title="DataMapper" <%=current?("/test")%>>Test</a></li>		
-	<li><a href="http://campusvirtual.ull.es/1314/course/view.php?id=1104" title="PL-UDV" target="_blank">PL-UDV</a></li>
-	<li><a href="http://datamapper.org/" title="DataMapper" target="_blank">DataMapper</a></li>
-	
-	
-</ul>
-</nav>
+
 <br/>
 <div style="width:80%;margin-left:auto;margin-right:auto;">
 	<%= yield%>

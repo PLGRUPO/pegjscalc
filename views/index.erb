@@ -8,8 +8,7 @@
     <ul class="tabs">
         <li class="active"><a id="tad_entrada">Entrada</a></li>
         <li><a id="tad_salida">Salida</a></li>
-        <li><a><i class="icon-upload-2"></i>&nbsp;Upload</a></li>
-        <li class="place-right"><a><i class="icon-cog"></i></a></li>
+        <li class="place-right"><a id="savebutton"><i class="icon-upload-2"></i>&nbsp;Upload</a></li>
     </ul>
  
  <br>
@@ -19,18 +18,18 @@
 					<input type="file" id="examples"/>
 				</p>
 				<p>
-					<nav>
-					<ul>
-						<% programs.each do |p| %>
-						<li><a href="<%= p.name %>" <%=current?('/'+p.name)%>><% p.name e %></a></li>
-						<% end %>
-					</ul>
-					</nav>
 					
-							<form action="/save" method="post">
+					<div>
+						<% programs.each do |p| %>
+						<button><a href="<%= p.name %>" <%=current?('/'+p.name)%>><i class="icon-new"></i>  <%= p.name %></a></button>
+						<% end %>
+					</div>
+					
+					
+							<form id="formsave" action="/save" method="post">
 							<div style="float: left; color:black;"><label for="saveas">Save as</label></div>
 								<input id="saveas" type="text" name="fname" title="name" pattern="\w+"/>
-								<br/><br/>
+								<br/>
 								<textarea id="input" name="input" autofocus style="width:100%;height:290px">
 								<%= source %>
 								</textarea>
@@ -40,17 +39,16 @@
 						
 						
 							<div class="input-control switch" id="parse" style="margin-left:auto;margin-right:auto;">
-    <label style="color:black;">
-   OFF&nbsp;
-        <input type="checkbox" />
-        <span class="check"></span>
-      &nbsp; ON  
-    </label>
-</div>
+							      <button class="image-button bg-darkGreen fg-white image-left">
+								<i class="icon-rocket on-left bg-green"></i>
+								Parse
+							      </button>
+							</div>
 
 
 				</p>
 				</div>
+				<br/>
 <div id="salida" style="color:black;">
 
 				<div class="output" style="overflow-y: scroll;">
@@ -60,7 +58,7 @@
 				</div>
 				</div>
 			</div>
-			<div class="tile double bg-gray ol-transparent">
+			<div class="tile bg-gray">
 				<a href="https://github.com/PLGRUPO/pegjscalc" target="_blank">
 				<div class="tile-content icon">
 					<span class="icon-github"></span>
@@ -69,6 +67,17 @@
 							<div class="label">Repositorio</div>
 						</div>
 				</a><a>
+				</a>
+			</div>
+			<div class="tile bg-gray">
+				<a href="http://datamapper.org/" target="_blank">
+				
+					<img src="/datamapper.png" style="max-height:100%; height:200px;"/>
+				
+				
+				<div class="brand">
+							<div class="label">Datamapper</div>
+						</div>
 				</a>
 			</div>
 			<div class="tile ">
