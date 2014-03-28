@@ -19,6 +19,23 @@ $(document).ready(function() {
     r.readAsText(f);
   });
 
+  
+  
+$( "#tad_entrada" ).click(function() {
+  $("#salida").hide();
+  $( "#entrada" ).show();
+});
+
+$( "#tad_salida" ).click(function() {
+  $("#entrada").hide();
+  editor.
+  $( "#salida" ).show();
+});
+
+  var editor = CodeMirror.fromTextArea($("#salida"), {
+    mode: "text/pascal"
+  });
+
 });
 
   

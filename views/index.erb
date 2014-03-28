@@ -6,18 +6,15 @@
 			
 			<div class="tab-control" data-role="tab-control">
     <ul class="tabs">
-        <li class="active"><a href="#_page_1">Entrada</a></li>
-        <li><a href="#_page_2">Salida</a></li>
-        <li><a href="#_page_3">Upload<i class="icon-rocket"></i></a></li>
-        <li class="place-right"><a href="#_page_4"><i class="icon-cog"></i></a></li>
+        <li class="active"><a id="tad_entrada">Entrada</a></li>
+        <li><a id="tad_salida">Salida</a></li>
+        <li><a><i class="icon-upload-2"></i>&nbsp;Upload</a></li>
+        <li class="place-right"><a><i class="icon-cog"></i></a></li>
     </ul>
  
-    <div class="frames">
-        <div class="frame" id="_page_1">...</div>
-        <div class="frame" id="_page_2">...</div>
-        <div class="frame" id="_page_3">...</div>
-    </div>
+ <br>
 </div>
+<div id="entrada">
 				<p>
 					<input type="file" id="examples"/>
 				</p>
@@ -44,19 +41,23 @@
 						
 							<div class="input-control switch" id="parse" style="margin-left:auto;margin-right:auto;">
     <label style="color:black;">
-    ON
+   OFF&nbsp;
         <input type="checkbox" />
         <span class="check"></span>
-        OFF
+      &nbsp; ON  
     </label>
 </div>
-					
+
+
 				</p>
+				</div>
+<div id="salida" style="color:black;">
+
 				<div class="output">
-					<pre>
-						<span id="output"></span>
-						<!-- Output goes here! -->
+					<pre id="output" style="overflow: auto;">
+						
 					</pre>
+				</div>
 				</div>
 			</div>
 			<div class="tile double bg-gray ol-transparent">
