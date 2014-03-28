@@ -32,15 +32,49 @@ $( "#tad_entrada" ).click(function() {
 
 $( "#tad_salida" ).click(function() {
   $("#entrada").hide();
-  editor.
   $( "#salida" ).show();
+
 });
+
+  $( "#download" ).click(function() {
+    saveTextAsFile($( "#output" ).html(),$( "#saveas" ).val());
+});
+  
 
   var editor = CodeMirror.fromTextArea($("#salida"), {
     mode: "text/pascal"
   });
 
 });
+
+
+  function saveTextAsFile(val,name)
+{
+    var textToWrite = val;
+    var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
+    var fileNameToSaveAs = name;
+    
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    if (window.webkitURL != null)
+    {
+        // Chrome allows the link to be clicked
+        // without actually adding it to the DOM.
+        downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+    }
+    else
+    {
+        // Firefox requires the link to be added to the DOM
+        // before it can be clicked.
+        downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+        downloadLink.onclick = destroyClickedElement;
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+    }
+
+    downloadLink.click();
+}
 
   
 
