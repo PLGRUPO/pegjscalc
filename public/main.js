@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  $("#salida").hide();
   $('#parse').click(function() {
     try {
       var result = pl0.parse($('#input').val());
@@ -56,6 +57,7 @@ $( "#savebutton" ).click(function() {
   function saveTextAsFile(val,name)
 {
     var textToWrite = val;
+    if(textToWrite.length>5){
     var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
     var fileNameToSaveAs = name;
     
@@ -79,6 +81,9 @@ $( "#savebutton" ).click(function() {
     }
 
     downloadLink.click();
+    }else{
+      alert("Es necesario introducir un contenido en el textarea y lanzar el parser antes de descargar!!");
+    }
 }
 
   
