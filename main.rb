@@ -55,3 +55,7 @@ post '/save' do
   pp c
   redirect '/'
 end
+
+get '/test' do
+  erb :test
+end
