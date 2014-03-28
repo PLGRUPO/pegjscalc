@@ -27,6 +27,10 @@ get '/grammar' do
   erb :grammar
 end
 
+get '/test' do
+  erb :test
+end
+
 get '/:selected?' do |selected|
   programs = PL0Program.all
   #pp programs
@@ -64,6 +68,4 @@ post '/save' do
   redirect '/'
 end
 
-get '/test' do
-  erb :test
-end
+
