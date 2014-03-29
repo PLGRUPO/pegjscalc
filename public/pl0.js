@@ -128,7 +128,7 @@ pl0 = (function() {
               type: 'IFELSE',
               cond: c,
               st: st,
-              sf: sf,
+              sf: sf
             };
           },
         peg$c14 = function(c, st) {
@@ -196,7 +196,7 @@ pl0 = (function() {
         },
         peg$c37 = /^[0-9]/,
         peg$c38 = { type: "class", value: "[0-9]", description: "[0-9]" },
-        peg$c39 = function(digits) { 
+        peg$c39 = function(digits) {
           return {
             type: 'NUM',
             value: parseInt(digits, 10)

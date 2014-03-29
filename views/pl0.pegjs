@@ -130,7 +130,7 @@ statement
       type: 'IFELSE',
       cond: c,
       st: st,
-      sf: sf,
+      sf: sf
     };
   }
   / IF LEFTPAR c:condition RIGHTPAR THEN st:statement {
@@ -181,7 +181,7 @@ condition
 expression = t:term r:(ADD term)* { return tree(t,r); }
 term = f:factor r:(MUL factor)* { return tree(f,r); }
 
-factor 
+factor
   = NUMBER
   / ID
   / LEFTPAR exp:expression RIGHTPAR { return exp; }
@@ -199,7 +199,7 @@ ID = _ id:$([a-zA-Z_][a-zA-Z_0-9]*) _ {
   };
 }
 
-NUMBER = _ digits:$[0-9]+ _ { 
+NUMBER = _ digits:$[0-9]+ _ {
   return {
     type: 'NUM',
     value: parseInt(digits, 10)
