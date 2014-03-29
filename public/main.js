@@ -44,11 +44,6 @@ $(document).ready(function() {
     else
       alert("Debes dar un nombre al fichero");
   });
-
-  var editor = CodeMirror.fromTextArea($("#input"), {
-    mode: "text/pascal"
-  });
-
 });
 
 function tabTransition (t1, t2) {
@@ -91,7 +86,6 @@ function saveTextAsFile (val,name) {
 }
 
 function test_main(value){ 
-       var result = pl0.parse(value);
-       
-      return JSON.stringify(result,undefined,2).replace(/\n/g,"");
+  var result = pl0.parse(value);
+  return JSON.stringify(result,undefined,2).replace(/\n/g,"");
 }

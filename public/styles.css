@@ -81,3 +81,7 @@ nav a.current {
 
 .centered {
   text-align: center; }
+
+.tabs li {
+  cursor: pointer;
+}
