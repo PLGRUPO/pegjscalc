@@ -20,7 +20,7 @@
             <input type="file" id="examples"/>
           </p>
           <p>
-            <div>
+            <div style="margin-bottom:10px;">
               <% programs.each do |p| %>
                 <div class="button">
                   <a href="<%= p.name %>" <%=current?('/'+p.name)%>>
@@ -49,7 +49,7 @@
           </p>
         </div>
 
-        <div id="salida" style="color:black;">
+        <div id="salida" style="padding-left:10px;padding-right:10px;color:black;font-family:monospace;">
           <div class="output">
             <pre>
               <span  id="output" ></span>
