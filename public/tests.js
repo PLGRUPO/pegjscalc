@@ -10,7 +10,6 @@ var callback = {
   },
 
   test: function(text) {
-    alert(test_main(text));
     return test_main(text);
   }
 };
