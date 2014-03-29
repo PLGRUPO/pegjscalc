@@ -35,7 +35,7 @@
                 <div style="float: left; color:black;"><label for="saveas">Save as</label></div>
                 <input style="margin-left:10px;" id="saveas" type="text" name="fname" title="name" pattern="\w+"/>
               </div>
-              <textarea id="input" name="input" autofocus style="width:100%;min-height:194px;min-width:100%;max-width:100%;height:209px">
+              <textarea id="input" name="input" autofocus style="width:100%;min-height:194px;min-width:100%;max-width:100%;height:209px;font-family:monospace;font-size:80%;" wrap="off">
                 <%= source %>
               </textarea>
               <br/>
@@ -49,10 +49,8 @@
           </p>
         </div>
 
-        <br/>
-
         <div id="salida" style="color:black;">
-          <div class="output" style="overflow-y: scroll;">
+          <div class="output">
             <pre>
               <span  id="output" ></span>
             </pre>
@@ -61,66 +59,52 @@
 
       </div>
 
+      <!-- Tiles -->
       <div class="tile bg-gray">
         <a href="https://github.com/PLGRUPO/pegjscalc" target="_blank">
-        <div class="tile-content icon">
-          <span class="icon-github"></span>
-        </div>
-        <div class="brand">
-              <div class="label">Repositorio</div>
-            </div>
-        </a><a>
+          <div class="tile-content icon">
+            <span class="icon-github"></span>
+          </div>
+          <div class="brand">
+            <div class="label">Repositorio</div>
+          </div>
         </a>
       </div>
-      <div class="tile bg-gray">
+      <div class="tile">
         <a href="http://datamapper.org/" target="_blank">
-        
           <img src="/datamapper.png" style="max-height:100%; height:200px;"/>
-        
-        
-        <div class="brand">
-              <div class="label">Datamapper</div>
-            </div>
         </a>
       </div>
-      <div class="tile ">
+      <div class="tile">
         <a href="http://en.wikipedia.org/wiki/Recursive_descent_parser#Example_parser" title="Wikipedia" target="_blank">
-        <img src="/wikipediapng.png" style="max-height:100%; height:200px;">
-        
+          <img src="/wikipediapng.png" style="max-height:100%; height:200px;">
         </a>
       </div>
       <div class="tile">
         <a href="http://docs.mathjax.org/en/latest/start.html" title="MathJax" target="_blank">
-        <img src="/mathjax.png" style="max-height:100%; height:200px;">
-        
+          <img src="/mathjax.png" style="max-height:100%; height:200px;">
         </a>
       </div>
       <div class="tile bg-red">
         <a href="http://pegjs.majda.cz/" title="PEG.js" target="_blank">
-        <img src="/pegjs.jpg" style="max-height:100%; height:200px;">
-        <div class="brand">
-          <div class="label">
-            mathjax
-          </div>
-        </div>
-      </a>
+          <img src="/pegjs.jpg" style="max-height:100%; height:200px;">
+        </a>
       </div>
       <div class="tile">
-      <li>
-      <a href="http://crguezl.github.io/pl-html/" title="PLGH" target="_blank">
-        <img src="/moodle.png" style="max-height:100%; height:200px;width:100%">
-      </a>
+        <a href="http://crguezl.github.io/pl-html/" title="PLGH" target="_blank">
+          <img src="/moodle.png" style="max-height:100%; height:200px;width:100%">
+        </a>
       </div>
       <div class="tile double">
         <a class="tile double bg-lightBlue" data-click="transform" href="http://sass-lang.com/" title="Sass" target="_blank">
-        <div class="tile-content image">
-          <img src="/haml-sass.jpg" style="max-height:100%; height:200px;">
-        </div>
-      
+          <div class="tile-content image">
+            <img src="/haml-sass.jpg" style="max-height:100%; height:200px;">
+          </div>
         </a>
       </div>
     </div>
   </div>
 </div>
+
 <script src="pl0.js"></script>
 <script src="main.js"></script>

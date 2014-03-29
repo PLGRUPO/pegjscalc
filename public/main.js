@@ -1,10 +1,10 @@
 $(document).ready(function() {
-  $("#salida").hide();
+  $('#salida').hide();
   $('#parse').click(function() {
     try {
       var result = pl0.parse($('#input').val());
       $('#output').html(JSON.stringify(result,undefined,2));
-      $("#entrada").hide();
+      $('#entrada').hide();
       $( "#salida" ).show();
     } catch (e) {
       $('#output').html('<div class="error"><pre>\n' + String(e) + '\n</pre></div>');
@@ -15,19 +15,17 @@ $(document).ready(function() {
     var f = ev.target.files[0]; 
     if(f){
       var r = new FileReader();
-	r.onload = function(e) { 
-	  var contents = e.target.result;
-	  $("#saveas").val(f.name);
-	  input.innerHTML = contents;
-	}
+      r.onload = function(e) { 
+        var contents = e.target.result;
+        $("#saveas").val(f.name);
+        input.innerHTML = contents;
+      }
       r.readAsText(f);
     } else { 
       alert("Failed to load file");
     }
   });
 
-  
-  
 $( "#tad_entrada" ).click(function() {
     $( "#tad_salida" ).parent().removeClass("active");
     $( "#savebutton" ).parent().removeClass("active");
@@ -67,7 +65,7 @@ $( "#savebutton" ).click(function() {
     $('#formsave').submit();
 });
 
-  var editor = CodeMirror.fromTextArea($("#salida"), {
+  var editor = CodeMirror.fromTextArea($("#input"), {
     mode: "text/pascal"
   });
 

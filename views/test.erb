@@ -1,19 +1,15 @@
 <h2>Test</h2>
 
-
-<body>
-<script type='text/javascript' src='/chai.js'/>
-<script type='text/javascript' src='/mocha.js'/>
+<script type='text/javascript' src='/chai.js'></script>
+<script type='text/javascript' src='/mocha.js'></script>
 
 <div id="mocha">
-  <script>
-     mocha.setup('tdd');
-    </script>
-    <script type='text/javascript' src='/tests.js'/>
-    <script>
-  mocha.run();
-   
-    </script>
-  
 </div>
-</body>
+
+<script type='text/javascript'>
+   mocha.setup('tdd');
+</script>
+<script type='text/javascript' src='/tests.js'></script>
+<script>
+  mocha.run();
+</script>
