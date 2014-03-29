@@ -29,21 +29,41 @@ $(document).ready(function() {
   
   
 $( "#tad_entrada" ).click(function() {
+    $( "#tad_salida" ).parent().removeClass("active");
+    $( "#savebutton" ).parent().removeClass("active");
+    $( "#download" ).parent().removeClass("active");  
+    $( "#tad_entrada" ).parent().addClass("active");
+    
   $("#salida").hide();
   $( "#entrada" ).show();
 });
 
 $( "#tad_salida" ).click(function() {
+    $( "#tad_entrada" ).parent().removeClass("active");
+    $( "#savebutton" ).parent().removeClass("active");
+    $( "#download" ).parent().removeClass("active");  
+    $( "#tad_salida" ).parent().addClass("active");
+    
   $("#entrada").hide();
   $( "#salida" ).show();
 
 });
 
   $( "#download" ).click(function() {
+    $( "#tad_entrada" ).parent().removeClass("active");
+    $( "#savebutton" ).parent().removeClass("active");
+    $( "#tad_salida" ).parent().removeClass("active");  
+    $( "#download" ).parent().addClass("active");
+    
     saveTextAsFile($( "#output" ).html(),$( "#saveas" ).val());
 });
   
 $( "#savebutton" ).click(function() {
+    $( "#tad_entrada" ).parent().removeClass("active");
+    $( "#download" ).parent().removeClass("active");
+    $( "#tad_salida" ).parent().removeClass("active");  
+    $( "#savebutton" ).parent().addClass("active");
+    
     $('#formsave').submit();
 });
 

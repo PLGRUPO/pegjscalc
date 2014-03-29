@@ -59,7 +59,7 @@ post '/save' do
     c.name = params["fname"]
     c.source = params["input"]
 
-    if n_saved < 5
+    if n_saved < 6
       n_saved = n_saved+1
     else
       elim = PL0Program.first
