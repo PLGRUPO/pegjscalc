@@ -210,21 +210,21 @@ COMPARISON_OP
   = _ op:$([<>=!]'=') _ { return op; }
   / _ op:[<>] _ { return op; }
 
+COMMA        = _','_
+END_SENTENCE = _';'_
+END_SYMBOL   = _'.'_
 LEFTPAR      = _"("_
 RIGHTPAR     = _")"_
-END_SYMBOL   = _'.'_
-END_SENTENCE = _';'_
-COMMA        = _','_
 
-VAR          = _'VAR'_
-CONST        = _'CONST'_
-IF           = _'IF'_
-THEN         = _'THEN'_
-ELSE         = _'ELSE'_
-PROCEDURE    = _'PROCEDURE'_
-CALL         = _'CALL'_
-BEGIN        = _'BEGIN'_
-END          = _'END'_
-WHILE        = _'WHILE'_
-DO           = _'DO'_
-ODD          = _'ODD'_
+BEGIN        = _'begin'_
+CALL         = _'call'_
+CONST        = _'const'_
+DO           = _'do'_
+ELSE         = _'else'_
+END          = _'end'_
+IF           = _'if'_
+ODD          = _'odd'_
+PROCEDURE    = _'procedure'_
+THEN         = _'then'_
+VAR          = _'var'_
+WHILE        = _'while'_
