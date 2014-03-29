@@ -10,6 +10,7 @@ var callback = {
   },
 
   test: function(text) {
+    alert(test_main(text));
     return test_main(text);
   }
 };
@@ -24,7 +25,7 @@ var solution4 ='SyntaxError: Expected "." or [ \t\n\r] but end of input found.';
 suite('PL/0 Analyzer using PEG.js', function() {
 
     test('Declaracion de variables y un bloque ', function () {
-      assert.deepEqual(callback.test('CONST  m =  7,  n = 85; VAR  x, y, z, q, r; BEGIN END.'),declaracion_variables);
+      assert.deepEqual(callback.test('const  m = 7,  n = 85; var  x, y, z, q, r; begin end.'),declaracion_variables);
       
     });
     
@@ -45,16 +46,16 @@ suite('PL/0 Analyzer using PEG.js', function() {
     });
 
     test('Bloque con bucle while e itrucciones condicionales (if else) ', function () {
-      assert.deepEqual(callback.test("VAR f, g; BEGIN  f = x;  g = y;  WHILE (f != g) DO BEGIN IF (f < g) THEN g = g - f; IF (g < f) THEN f = f - g END; z = f; END."),solution2);
+      assert.deepEqual(callback.test("var f, g; begin  f = x;  g = y;  while (f != g) do begin if (f < g) then g = g - f; if (g < f) then f = f - g end; z = f; end."),solution2);
     });
     
     test('Bloque completo con instrucciones while y operaciones algebraicas ', function () {
-      assert.deepEqual(callback.test("BEGIN r = x; q = 0; w = y; WHILE (w <= r) DO w = 2 * w; WHILE (w > y) DO BEGIN q = 2 * q;  w = w / 2; IF (w <= r) THEN BEGIN      r = r - w;      q = q + 1    END  END END."),solution3); 
+      assert.deepEqual(callback.test("begin r = x; q = 0; w = y; while (w <= r) do w = 2 * w; while (w > y) do begin q = 2 * q;  w = w / 2; if (w <= r) then begin      r = r - w;      q = q + 1    end end end."),solution3); 
       
     });
     
      test('Bloque completo con instrucciones while y operaciones algebraicas (ERROR FALTA .)', function () {
-      assert.deepEqual(callback.test("BEGIN r = x; q = 0; w = y; WHILE (w <= r) DO w = 2 * w; WHILE (w > y) DO BEGIN q = 2 * q;  w = w / 2; IF (w <= r) THEN BEGIN      r = r - w;      q = q + 1    END  END END"),solution4); 
+      assert.deepEqual(callback.test("begin r = x; q = 0; w = y; while (w <= r) do w = 2 * w; while (w > y) do begin q = 2 * q;  w = w / 2; if (w <= r) then begin      r = r - w;      q = q + 1    end end end"),solution4); 
       
     });
 
