@@ -35,9 +35,7 @@
                 <div style="float: left; color:black;"><label for="saveas">Save as</label></div>
                 <input style="margin-left:10px;" id="saveas" type="text" name="fname" title="name" pattern="\w+"/>
               </div>
-              <textarea id="input" name="input" autofocus style="width:100%;min-height:194px;min-width:100%;max-width:100%;height:209px;font-family:monospace;font-size:80%;" wrap="off">
-                <%= source %>
-              </textarea>
+              <textarea id="input" name="input" autofocus style="width:100%;min-height:194px;min-width:100%;max-width:100%;height:209px;font-family:monospace;font-size:80%;" wrap="off"><%= source %></textarea>
               <br/>
             </form>
             <div class="input-control switch" id="parse" style="margin-left:auto;margin-right:auto;">
@@ -51,9 +49,7 @@
 
         <div id="salida" style="padding-left:10px;padding-right:10px;color:black;font-family:monospace;">
           <div class="output">
-            <pre>
-              <span  id="output" ></span>
-            </pre>
+            <pre><span id="output"></span></pre>
           </div>
         </div>
 
