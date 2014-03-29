@@ -5,7 +5,7 @@
 <title>pegjs</title>
 <link rel="icon" type="image/jpg" href="favicon.jpg"/>
 <link rel="stylesheet" href="/styles.css" type="text/css" media="screen" charset="utf-8"/>
-<link rel="stylesheet" href="/Metro/css/metro-bootstrap.css"type="text/css" media="screen" charset="utf-8"/>
+<link rel="stylesheet" href="/Metro/min/metro-bootstrap.min.css" type="text/css" media="screen" charset="utf-8"/>
 <link rel="stylesheet" href="/Metro/min/metro-bootstrap-responsive.min.css" type="text/css" media="screen" charset="utf-8"/>
 <link rel="stylesheet" href="/codemirror/lib/codemirror.css" type="text/css" media="screen" charset="utf-8"/>
 <link rel="stylesheet" href="/mocha.css" type="text/css" media="screen" charset="utf-8"/>
@@ -16,29 +16,26 @@
 <script src="/codemirror/lib/codemirror.js"></script>
 <script src="/Metro/min/jquery.widget.min.js"></script>
 <script src="/Metro/min/metro.min.js"></script>
-
 </head>
+
 <body class="metro">
 <div class="navbar">
-	<div class="navbar-content">
-		<a href="/" class="element"><span class="icon-home"></span> HOME</a>
-		<span class="element-divider"></span>
-		<a class="pull-menu" href="#"></a>
-		<ul class="element-menu">
-			<li>
-			<a class="element brand"> Analizador de PL0 ampliado usando PEG.js</a>
-			</li>
-				<li><a href="/grammar" title="Grammar" <%=current?("/grammar")%>>Grammar</a></li>
-	<li><a href="/test" title="DataMapper" <%=current?("/test")%>>Test</a></li>		
-	<li><a href="http://campusvirtual.ull.es/1314/course/view.php?id=1104" title="PL-UDV" target="_blank">PL-UDV</a></li>
-	</ul>
-		
-	</div>
+  <div class="navbar-content">
+    <a href="/" class="element"><span class="icon-home"></span>&nbsp;HOME</a>
+    <span class="element-divider"></span>
+    <a class="pull-menu" href="#"></a>
+    <ul class="element-menu">
+      <li><a class="brand"> Analizador de PL0 ampliado usando PEG.js</a></li>
+      <li><a href="/grammar" title="Grammar" class="element" <%=current?("/grammar")%>>Grammar</a></li>
+      <li><a href="/test" title="Test" class="element" <%=current?("/test")%>>Test</a></li>   
+      <li><a href="http://campusvirtual.ull.es/1314/course/view.php?id=1104" title="PL-UDV" class="element" target="_blank">PL-UDV</a></li>
+    </ul>
+  </div>
 </div>
 
 <br/>
 <div style="width:80%;margin-left:auto;margin-right:auto;">
-	<%= yield%>
+  <%= yield%>
 </div>
 </body>
 </html>

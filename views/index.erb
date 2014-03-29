@@ -1,124 +1,126 @@
 <div class="main-content clearfix">
-	<div class="tile-area no-padding clearfix">
-		<div class="tile-group no-margin no-padding1 clearfix" style="width: 100%;">
-		
-			<div class="tile quadro quadro-vertical ol-transparent">
-			
-			<div class="tab-control" data-role="tab-control">
-    <ul class="tabs">
-        <li class="active"><a id="tad_entrada">Entrada</a></li>
-        <li><a id="tad_salida">Salida</a></li>
-        <li ><a id="savebutton"><i class="icon-upload-2"></i>&nbsp;Upload</a></li>
-         <li><a id ="download"><span class="icon-download-2">&nbsp;Download</span></a></li>
-    </ul>
- 
- <br>
-</div>
-<div id="entrada" style="margin-left: 10px;margin-right: 10px;">
-				<p>
-					<input type="file" id="examples"/>
-				</p>
-				<p>
-					
-					<div>
-						<% programs.each do |p| %>
-						<button><a href="<%= p.name %>" <%=current?('/'+p.name)%>><i class="icon-new"></i>  <%= p.name %></a></button>
-						<% end %>
-					</div>
-					
-					
-							<form id="formsave" action="/save" method="post">
-							<div style="float: left; color:black;"><label for="saveas">Save as</label></div>
-								<input style="margin-left:10px;" id="saveas" type="text" name="fname" title="name" pattern="\w+"/>
-								<br/>
-								<textarea id="input" name="input" autofocus style="width:100%;height:290px">
-								<%= source %>
-								</textarea>
-								<br/>
-								
-							</form>
-						
-						
-							<div class="input-control switch" id="parse" style="margin-left:auto;margin-right:auto;">
-							      <button class="image-button bg-darkGreen fg-white image-left">
-								<i class="icon-rocket on-left bg-green"></i>
-								Parse
-							      </button>
-							</div>
+  <div class="tile-area no-padding clearfix">
+    <div class="tile-group no-margin no-padding1 clearfix" style="width: 100%;">
+    
+      <div class="tile quadro quadro-vertical ol-transparent" style="height:initial;">
+      
+        <div class="tab-control" data-role="tab-control">
+        <ul class="tabs">
+          <li class="active"><a id="tad_entrada">Entrada</a></li>
+          <li><a id="tad_salida">Salida</a></li>
+          <li ><a id="savebutton"><i class="icon-upload-2"></i>&nbsp;Upload</a></li>
+          <li><a id ="download"><span class="icon-download-2">&nbsp;Download</span></a></li>
+        </ul>
 
+        <br>
 
-				</p>
-				</div>
-				<br/>
-<div id="salida" style="color:black;">
+        </div>
+        <div id="entrada" style="padding-left:10px;padding-right:10px;">
+          <p>
+            <input type="file" id="examples"/>
+          </p>
+          <p>
+            <div>
+              <% programs.each do |p| %>
+                <div class="button">
+                  <a href="<%= p.name %>" <%=current?('/'+p.name)%>>
+                    <i class="icon-new"></i> 
+                    <%= p.name %>
+                  </a>
+                </div>
+              <% end %>
+            </div>
+            <form id="formsave" action="/save" method="post">
+              <div style="margin-bottom:10px;">
+                <div style="float: left; color:black;"><label for="saveas">Save as</label></div>
+                <input style="margin-left:10px;" id="saveas" type="text" name="fname" title="name" pattern="\w+"/>
+              </div>
+              <textarea id="input" name="input" autofocus style="width:100%;min-height:194px;min-width:100%;max-width:100%;height:209px">
+                <%= source %>
+              </textarea>
+              <br/>
+            </form>
+            <div class="input-control switch" id="parse" style="margin-left:auto;margin-right:auto;">
+              <button class="image-button bg-darkGreen fg-white image-left">
+                <i class="icon-rocket on-left bg-green"></i>
+                Parse
+              </button>
+            </div>
+          </p>
+        </div>
 
-				<div class="output" style="overflow-y: scroll;">
-					<pre>
-						<span  id="output" ></span>
-					</pre>
-				</div>
-				</div>
-			</div>
-			<div class="tile bg-gray">
-				<a href="https://github.com/PLGRUPO/pegjscalc" target="_blank">
-				<div class="tile-content icon">
-					<span class="icon-github"></span>
-				</div>
-				<div class="brand">
-							<div class="label">Repositorio</div>
-						</div>
-				</a><a>
-				</a>
-			</div>
-			<div class="tile bg-gray">
-				<a href="http://datamapper.org/" target="_blank">
-				
-					<img src="/datamapper.png" style="max-height:100%; height:200px;"/>
-				
-				
-				<div class="brand">
-							<div class="label">Datamapper</div>
-						</div>
-				</a>
-			</div>
-			<div class="tile ">
-				<a href="http://en.wikipedia.org/wiki/Recursive_descent_parser#Example_parser" title="Wikipedia" target="_blank">
-				<img src="/wikipediapng.png" style="max-height:100%; height:200px;">
-				
-				</a>
-			</div>
-			<div class="tile">
-				<a href="http://docs.mathjax.org/en/latest/start.html" title="MathJax" target="_blank">
-				<img src="/mathjax.png" style="max-height:100%; height:200px;">
-				
-				</a>
-			</div>
-			<div class="tile bg-red">
-			  <a href="http://pegjs.majda.cz/" title="PEG.js" target="_blank">
-				<img src="/pegjs.jpg" style="max-height:100%; height:200px;">
-				<div class="brand">
-					<div class="label">
-						mathjax
-					</div>
-				</div>
-			</a>
-			</div>
-			<div class="tile">
-			<li>
-			<a href="http://crguezl.github.io/pl-html/" title="PLGH" target="_blank">
-				<img src="/moodle.png" style="max-height:100%; height:200px;width:100%">
-			</a>
-			</div>
-			<div class="tile double ol-transparent">
-				<a class="tile double bg-lightBlue" data-click="transform" href="http://sass-lang.com/" title="Sass" target="_blank">
-				<div class="tile-content image">
-					<img src="/haml-sass.jpg" style="max-height:100%; height:200px;">
-				</div>
-			
-				</a>
-			</div>
-		</div>
-	</div>
+        <br/>
+
+        <div id="salida" style="color:black;">
+          <div class="output" style="overflow-y: scroll;">
+            <pre>
+              <span  id="output" ></span>
+            </pre>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tile bg-gray">
+        <a href="https://github.com/PLGRUPO/pegjscalc" target="_blank">
+        <div class="tile-content icon">
+          <span class="icon-github"></span>
+        </div>
+        <div class="brand">
+              <div class="label">Repositorio</div>
+            </div>
+        </a><a>
+        </a>
+      </div>
+      <div class="tile bg-gray">
+        <a href="http://datamapper.org/" target="_blank">
+        
+          <img src="/datamapper.png" style="max-height:100%; height:200px;"/>
+        
+        
+        <div class="brand">
+              <div class="label">Datamapper</div>
+            </div>
+        </a>
+      </div>
+      <div class="tile ">
+        <a href="http://en.wikipedia.org/wiki/Recursive_descent_parser#Example_parser" title="Wikipedia" target="_blank">
+        <img src="/wikipediapng.png" style="max-height:100%; height:200px;">
+        
+        </a>
+      </div>
+      <div class="tile">
+        <a href="http://docs.mathjax.org/en/latest/start.html" title="MathJax" target="_blank">
+        <img src="/mathjax.png" style="max-height:100%; height:200px;">
+        
+        </a>
+      </div>
+      <div class="tile bg-red">
+        <a href="http://pegjs.majda.cz/" title="PEG.js" target="_blank">
+        <img src="/pegjs.jpg" style="max-height:100%; height:200px;">
+        <div class="brand">
+          <div class="label">
+            mathjax
+          </div>
+        </div>
+      </a>
+      </div>
+      <div class="tile">
+      <li>
+      <a href="http://crguezl.github.io/pl-html/" title="PLGH" target="_blank">
+        <img src="/moodle.png" style="max-height:100%; height:200px;width:100%">
+      </a>
+      </div>
+      <div class="tile double">
+        <a class="tile double bg-lightBlue" data-click="transform" href="http://sass-lang.com/" title="Sass" target="_blank">
+        <div class="tile-content image">
+          <img src="/haml-sass.jpg" style="max-height:100%; height:200px;">
+        </div>
+      
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 <script src="pl0.js"></script>
 <script src="main.js"></script>
